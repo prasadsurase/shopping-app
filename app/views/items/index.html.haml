@@ -1,0 +1,11 @@
+%table
+  %thead
+    %th Name
+    %th Price
+    %th Discount
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= item.name
+        %td= item.price
+        %td= item.discount

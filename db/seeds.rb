@@ -7,16 +7,16 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Item.destroy_all
-Item.create([
-            { name: 'Smart Hub', price: 49.99 },
-            { name: 'Motion Sensor', price: 24.99 },
-            { name: 'Wireless Camera', price: 99.99 },
-            { name: 'Smoke Sensor', price: 19.99 },
-            { name: 'Water Leak Sensor', price: 14.99 }
+Item.create!([
+            { name: 'Smart Hub', price: 49.99, discount: 0 },
+            { name: 'Motion Sensor', price: 24.99, discount: 0 },
+            { name: 'Wireless Camera', price: 99.99, discount: 0 },
+            { name: 'Smoke Sensor', price: 19.99, discount: 0 },
+            { name: 'Water Leak Sensor', price: 14.99, discount: 0 }
 ])
 
 PromoCode.destroy_all
-PromoCode.create([
+PromoCode.create!([
                  { code: '20%OFF', combined: false, discount_type: 'percentage', active: true },
                  { code: '5%OFF', combined: true, discount_type: 'percentage', active: true },
                  { code: '20POUNDSOFF', combined: true, discount_type: 'value', active: true }
