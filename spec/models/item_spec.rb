@@ -8,4 +8,8 @@ RSpec.describe Item, type: :model do
     it { is_expected.to validate_numericality_of(:discount).is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_inclusion_of(:active).in_array([true, false]) }
   end
+
+  context 'associations' do
+    it { is_expected.to have_many(:order_items) }
+  end
 end
