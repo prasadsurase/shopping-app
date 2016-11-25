@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :order_items, only: [:index, :edit, :update]
+  resources :order_items, only: [:index, :edit, :update, :destroy]
 
   resource :basket, only: [:destroy]
 

@@ -1,0 +1,2 @@
+$("tr#order-item-#{@order_item.id}").replaceWith("#{escape_javascript(render partial: 'order_item', locals: {order_item: @order_item})}");
+$('h3 .pull-right').text("Total Amount: $#{current_basket.total}");

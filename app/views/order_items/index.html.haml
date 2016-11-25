@@ -1,24 +1,14 @@
 %h3
-  Items in basket
+  .pull-left Items in basket
+  .pull-right Total Amount: $#{current_basket.total}
 
 %table.table.table-bordered
   %thead
     %th Name
     %th Price
-    %th Unit Price
     %th Quantity
     %th Total Price
     %th Actions
   %tbody
     - @order_items.includes(:item).each do |order_item|
-      %tr
-        %td= order_item.item.name
-        %td= order_item.item.price
-        %td= order_item.unit_price
-        %td= order_item.quantity
-        %td= order_item.total_price
-        %td
-          = simple_form_for order_item, html: { class: 'form-horizontal' } do |f|
-            = f.input :quantity, label: false, input_html: {min: 1, max: 100, step: 1}
-            = f.button :submit, 'Update', class: 'btn btn-primary'
-          = link_to 'Remove', order_item_path(order_item), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+      = render 'order_item', order_item: order_item

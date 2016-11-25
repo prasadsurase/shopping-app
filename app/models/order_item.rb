@@ -9,6 +9,9 @@ class OrderItem < ApplicationRecord
 
   after_initialize :set_values
   before_update :set_values
+  after_update :update_order
+  after_destroy :update_order
+
 
   private
 
@@ -16,6 +19,15 @@ class OrderItem < ApplicationRecord
     self.quantity ||= 1
     self.unit_price = item.price
     self.total_price = self.quantity * item.price
+  end
+
+  def update_order
+    if order.order_items.count > 0
+      order.send :set_values
+      order.save
+    else
+      order.destroy
+    end
   end
 
 end

@@ -1,0 +1,10 @@
+%tr{id: "order-item-#{order_item.id}"}
+  %td= order_item.item.name
+  %td= order_item.item.price
+  %td= order_item.quantity
+  %td= order_item.total_price
+  %td
+    = simple_form_for order_item, html: { class: 'form-horizontal' }, remote: true do |f|
+      = f.input :quantity, label: false, input_html: {min: 1, max: 100, step: 1}
+      = f.button :submit, 'Update', class: 'btn btn-primary'
+    = link_to 'Remove', order_item_path(order_item), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, remote: true
