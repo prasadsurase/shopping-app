@@ -3,9 +3,11 @@
     %th Name
     %th Price
     %th Discount
+    %th Actions
   %tbody
     - @items.each do |item|
       %tr
         %td= item.name
         %td= item.price
         %td= item.discount
+        %th= link_to 'Add to Basket', add_to_basket_item_path(item)

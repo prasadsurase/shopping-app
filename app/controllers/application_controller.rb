@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   private
 
   def current_basket
-    session[:order_id] ? Order.find(session[:order_id]) : Order.new
+    if session[:order_id]
+      order = Order.find_by({id: session[:order_id]})
+      order ? order : Order.new
+    else
+      Order.new
+    end
   end
 end
