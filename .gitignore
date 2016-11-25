@@ -16,6 +16,7 @@ config/secrets.yml
 
 # Ignore settings
 config/secrets.yml
+coverage
 
 # Ignore Byebug command history file.
 .byebug_history
