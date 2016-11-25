@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration[5.0]
     create_table :items do |t|
       t.string :name
       t.float :price
-      t.boolean :active
+      t.boolean :active, default: true
       t.integer :discount
 
       t.timestamps
