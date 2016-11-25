@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'kaminari'
 gem "haml-rails", "~> 0.9"
+gem 'twitter-bootstrap-rails'
+gem 'simple_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
