@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :order_items
+  resource :basket, only: [:show]
 
   root 'items#index'
 end

@@ -8,5 +8,5 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     %div
-      = link_to "Basket: #{current_basket.order_items.count}", '#'
+      = link_to "Basket: #{current_basket.order_items.count}", basket_path
     = yield
