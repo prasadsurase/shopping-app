@@ -7,6 +7,7 @@ Items in basket
     %th Unit Price
     %th Quantity
     %th Total Price
+    %th Actions
   %tbody
     - @basket.order_items.includes(:item).each do |order_item|
       %tr
@@ -15,3 +16,6 @@ Items in basket
         %td= order_item.unit_price
         %td= order_item.quantity
         %td= order_item.total_price
+        %td
+          = link_to '+1', '#'
+          = link_to '-1', '#'

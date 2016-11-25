@@ -1,0 +1,7 @@
+Order Items
+= form_for(@basket, url: basket_path(@basket), method: :patch) do |basket_form|
+  = basket_form.text_field :total
+  = basket_form.fields_for :order_items, @basket.order_items do |item_form|
+    - order_item = item_form.object
+    Item Name: #{order_item.item.name}
+    = item_form.text_field :quantity

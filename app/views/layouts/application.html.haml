@@ -9,4 +9,6 @@
   %body
     %div
       = link_to "Basket: #{current_basket.order_items.count}", basket_path
+      = link_to 'Empty Basket!', basket_path, method: :delete if current_basket.order_items.count > 0
+      = link_to 'Edit Basket', edit_basket_path if current_basket.order_items.count > 0
     = yield
