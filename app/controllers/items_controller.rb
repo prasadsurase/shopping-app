@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     else
       basket.order_items.build({item: item})
       basket.valid?
-      basket.save
+      basket.save!
       session.destroy
       session[:order_id] = basket.id
       redirect_to items_path, success: 'Item has been added to the basket' and return

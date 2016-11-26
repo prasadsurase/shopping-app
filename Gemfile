@@ -28,9 +28,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'kaminari'
-gem "haml-rails", "~> 0.9"
+gem 'haml-rails', '~> 0.9'
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
+gem 'nested_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

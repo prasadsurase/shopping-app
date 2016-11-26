@@ -8,7 +8,12 @@ Rails.application.routes.draw do
 
   resources :order_items, only: [:index, :edit, :update, :destroy]
 
-  resource :basket, only: [:destroy]
+  resource :basket, only: [:destroy, :update] do
+    member do
+      get :checkout
+      put :check_discount
+    end
+  end
 
   root 'items#index'
 end

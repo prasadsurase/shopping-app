@@ -1,2 +1,3 @@
 $("tr#order-item-#{@order_item.id}").html('');
 $('h3 .pull-right').text("Total Amount: $#{current_basket.total}");
+$('#view-basket-link').text("View Basket (#{current_basket.order_items.count})")

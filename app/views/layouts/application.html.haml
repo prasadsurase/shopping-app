@@ -27,13 +27,15 @@
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
             %li= link_to "Items", items_path
-            %li= link_to "View Basket (#{current_basket.order_items.count})", order_items_path
-            %li= link_to 'Empty Basket!', basket_path, method: :delete if current_basket.order_items.count > 0
+            %li= link_to "View Basket (#{current_basket.order_items.count})", order_items_path, id: 'view-basket-link'
+            - if current_basket.order_items.count > 0
+              %li= link_to 'Empty Basket!', basket_path, method: :delete
+              %li= link_to 'Checkout!!!', checkout_basket_path
 
     .container
       .row
         .col-lg-12.col-md-12
           = bootstrap_flash
           = yield
-      %footer
+      %footer.hide
         %p &copy; Company 2016

@@ -17,8 +17,8 @@ Item.create!([
 
 PromoCode.destroy_all
 PromoCode.create!([
-                 { code: '20%OFF', combined: false, discount_type: 'percentage', active: true },
-                 { code: '5%OFF', combined: true, discount_type: 'percentage', active: true },
-                 { code: '20POUNDSOFF', combined: true, discount_type: 'value', active: true }
+                 { code: '20%OFF', combined: false, discount_type: 'percentage', active: true, value: 20 },
+                 { code: '5%OFF', combined: true, discount_type: 'percentage', active: true, value: 5 },
+                 { code: '20POUNDSOFF', combined: true, discount_type: 'value', active: true, value: 20 }
 
 ])

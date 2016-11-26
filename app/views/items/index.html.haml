@@ -12,4 +12,8 @@
         %td= item.name
         %td= item.price
         %td= item.discount
-        %th= link_to 'Add to Basket', add_to_basket_item_path(item)
+        %th
+          - if current_basket.items.include?(item)
+            Already added to list.
+          - else
+            = link_to 'Add to Basket', add_to_basket_item_path(item)
