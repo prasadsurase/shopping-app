@@ -20,9 +20,13 @@ class Order < ApplicationRecord
   def dup_user?(attrs)
     if attrs[:email].present?
       u = User.find_by(email: attrs[:email])
-      u.attributes = attrs
-      self.user = u
-      true
+      if u
+        u.attributes = attrs
+        self.user = u
+        true
+      else
+        false
+      end
     else
       false
     end

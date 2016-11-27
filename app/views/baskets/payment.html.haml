@@ -23,15 +23,16 @@
           %div
             = pf.label :address
             = pf.text_area :address
-          %div
-            = pf.label 'Credit Card Number'
-            = pf.text_field :cc_number
-          %div
-            = pf.label 'CVV'
-            = pf.text_field :cvv
-          %div
-            = pf.label 'Expiry Date'
-            = pf.date_select :cc_expiry_date, start_year: Date.today.year, start_month: Date.today.month, start_day: Date.today.day
+          = pf.fields_for :credit_cards, @credit_card do |ccf|
+            %div
+              = ccf.label 'Credit Card Number'
+              = ccf.text_field :number
+            %div
+              = ccf.label 'CVV'
+              = ccf.text_field :cvv
+            %div
+              = ccf.label 'Expiry Date'
+              = ccf.date_select :expiry_date, start_year: Date.today.year, start_month: Date.today.month, start_day: Date.today.day
     %div
       = f.submit 'Make Payment'
 - else

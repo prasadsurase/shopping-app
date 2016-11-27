@@ -15,6 +15,7 @@ class BasketsController < ApplicationController
 
   def payment
     @user = @basket.build_user
+    @credit_card = @user.credit_cards.build
   end
 
   def process_payment
@@ -48,6 +49,6 @@ class BasketsController < ApplicationController
   end
 
   def basket_payment_params
-    params.fetch(:order).permit(:id, user_attributes: [:email, :address, :cc_number, :cvv, :cc_expiry_date])
+    params.fetch(:order).permit(:id, user_attributes: [:email, :address, credit_cards_attributes: [:number, :cvv, :expiry_date]])
   end
 end
