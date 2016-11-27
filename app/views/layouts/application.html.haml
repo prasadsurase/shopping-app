@@ -26,6 +26,7 @@
         %a.navbar-brand(href="#{root_path}") Shopping Application
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
+            %li= link_to 'Orders Placed', orders_path
             %li= link_to "Items", items_path
             %li= link_to "View Basket (#{current_basket.order_items.count})", order_items_path, id: 'view-basket-link'
             - if current_basket.order_items.count > 0

@@ -1,0 +1,39 @@
+%h3 Order Details
+
+Total: #{@order.total}
+Discount: #{@order.discount}
+Final Total: #{@order.final_total}
+
+%br
+Ordered Items
+.row
+  .col-md-8
+    %table.table.table-bordered
+      %thead
+        %th Name
+        %th Price
+        %th Quantity
+        %th Total Price
+      %tbody
+        - @order.order_items.includes(:item).each do |order_item|
+          %tr{id: "order-item-#{order_item.id}"}
+            %td= order_item.item.name
+            %td= order_item.item.price
+            %td= order_item.quantity
+            %td= order_item.total_price
+
+%br
+Promo Codes Used:
+.row
+  .col-md-8
+    %table.table.table-bordered
+      %thead
+        %th Code
+        %th Description
+      %tbody
+        - @order.promo_codes.each do |code|
+          %tr
+            %td= code.code
+            %td= code.description
+
+

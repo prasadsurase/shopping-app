@@ -1,0 +1,19 @@
+%h3
+  Orders Placed
+%table.table.table-bordered
+  %thead
+    %th Customer Email
+    %th Total
+    %th Discount
+    %th Final Total
+    %th Actions
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.user.email
+        %td= order.total
+        %td= order.discount
+        %td= order.final_total
+        %td= link_to 'View Details', order_path(order)
+
+= paginate @orders

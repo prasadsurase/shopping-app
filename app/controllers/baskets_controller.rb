@@ -18,8 +18,7 @@ class BasketsController < ApplicationController
   end
 
   def process_payment
-    byebug
-    if @basket.update(basket_payment_params)
+    if @basket.update(basket_payment_params.merge(state: :confirmed))
       session.destroy
       flash[:success] = 'Payment successful'
       redirect_to items_path and return

@@ -7,10 +7,8 @@ class OrderItem < ApplicationRecord
   validates :quantity, numericality: { only_integer: true, greater_than: 0 }
   validates :unit_price, :total_price, numericality: { greater_than: 0 }
 
-  #after_initialize :set_values
   before_validation :set_values
-  #before_update :set_values
-  after_update :update_order
+  after_save :update_order
   after_destroy :update_order
 
   private
@@ -21,7 +19,7 @@ class OrderItem < ApplicationRecord
   end
 
   def update_order
-    if order.order_items.count > 0
+    if order.order_items.any?
       order.update_total_and_discount
       order.save
     else
