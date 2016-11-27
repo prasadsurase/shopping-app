@@ -25,6 +25,8 @@ class BasketsController < ApplicationController
       redirect_to items_path and return
     end
     @user = @basket.user
+    byebug
+    @credit_card = @user.credit_cards.last
     render :payment
   end
 
