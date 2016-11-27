@@ -16,7 +16,7 @@ class OrderPromoCode < ApplicationRecord
 
   # validate that the enter promocodes can be used jointly
   def some_validation
-    ids = order.order_promo_codes.collect &:promo_code_id
+    ids = order.order_promo_codes.collect(&:promo_code_id).uniq
     singular_promo_codes = PromoCode.where(id: ids).where(combined: false)
     # cant use count since that data isnt saved yet and count would fire an query
     if order.order_promo_codes.size > 1 and singular_promo_codes.count > 0

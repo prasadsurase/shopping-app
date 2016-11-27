@@ -12,8 +12,9 @@
         %td= item.name
         %td= item.price
         %td= item.discount
-        %th
-          - if current_basket.items.include?(item)
+        %td
+          - if @basket_items.include?(item)
             Already added to list.
           - else
             = link_to 'Add to Basket', add_to_basket_item_path(item)
+= paginate @items

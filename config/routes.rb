@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resource :basket, only: [:destroy, :update] do
     member do
       get :checkout
+      get :payment
+      put :process_payment
       put :check_discount
     end
   end

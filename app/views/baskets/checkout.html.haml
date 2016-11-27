@@ -2,6 +2,12 @@
   %h3
     Checkout the basket
   = nested_form_for(@basket, url: check_discount_basket_path, method: :put) do |f|
+    - if @basket.errors.any?
+      #error_explanation
+        = "#{pluralize(@basket.errors.count, "error")} prohibited the action"
+        %ul
+          - @basket.errors.full_messages.each do |message|
+            %li= message
     %div
       = f.label :total
       = f.text_field :total
@@ -9,11 +15,17 @@
       = f.label :discount
       = f.text_field :discount
     %div
-      = f.fields_for :order_promo_codes, @basket.order_promo_codes do |pf|
-        = pf.select :promo_code_id, PromoCode.active.pluck(:code, :id), prompt: 'Choose a code'
+      = f.label :final_total
+      = f.text_field :final_total, disabled: true
+    %div
+      = f.fields_for :order_promo_codes, @order_promo_codes do |pf|
+        = pf.select :promo_code_id, @promo_codes.pluck(:code, :id), prompt: 'Choose a code'
         = pf.link_to_remove 'Remove'
       = f.link_to_add "Add promocode", :order_promo_codes
     %div
       = f.submit 'Apply promo codes'
+  %br
+  %div
+    = link_to 'Make Payment', payment_basket_path, class: 'btn btn-primary'
 - else
   Your basket is empty. Please add items.

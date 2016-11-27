@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   def index
+    @basket = current_basket
+    @basket_items = @basket.items
     @items = Item.active.page(params[:page])
   end
 
@@ -14,7 +16,8 @@ class ItemsController < ApplicationController
       basket.save!
       session.destroy
       session[:order_id] = basket.id
-      redirect_to items_path, success: 'Item has been added to the basket' and return
+      flash[:success] = 'Item has been added to the basket'
+      redirect_to items_path and return
     end
   end
 end

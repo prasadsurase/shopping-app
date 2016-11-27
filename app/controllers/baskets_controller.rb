@@ -4,11 +4,28 @@ class BasketsController < ApplicationController
   def destroy
     @basket.destroy
     session.destroy
+    flash[:success] = 'Basket emptied successfully'
     redirect_to root_path and return
   end
 
   def checkout
     @promo_codes = PromoCode.active
+    @order_promo_codes = @basket.order_promo_codes
+  end
+
+  def payment
+    @user = @basket.build_user
+  end
+
+  def process_payment
+    byebug
+    if @basket.update(basket_payment_params)
+      session.destroy
+      flash[:success] = 'Payment successful'
+      redirect_to items_path and return
+    end
+    @user = @basket.user
+    render :payment
   end
 
   def check_discount
@@ -29,5 +46,9 @@ class BasketsController < ApplicationController
 
   def order_promo_codes_params
     params.fetch(:order).permit(order_promo_codes_attributes: [:promo_code_id, :_destroy])
+  end
+
+  def basket_payment_params
+    params.fetch(:order).permit(:id, user_attributes: [:email, :address, :cc_number, :cvv, :cc_expiry_date])
   end
 end

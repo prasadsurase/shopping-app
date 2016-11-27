@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
 
   def update
     @order_item = @basket.order_items.find(params[:id])
-    @order_item.update_attributes(order_item_params)
+    @order_item.update(order_item_params)
   end
 
   def destroy

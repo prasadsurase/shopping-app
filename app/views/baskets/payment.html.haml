@@ -1,0 +1,38 @@
+- if @basket.order_items.count > 0
+  %h3
+    Make Payment.
+  = nested_form_for(@basket, url: process_payment_basket_path, method: :put) do |f|
+    - if @basket.errors.any?
+      #error_explanation
+        = "#{pluralize(@basket.errors.count, "error")} prohibited this action"
+        %ul
+          - @basket.errors.full_messages.each do |message|
+            %li= message
+    = f.hidden_field :id, value: @basket.id
+    %div
+      = f.label :final_total
+      = f.text_field :final_total, disabled: true
+    %div
+      %br
+      %h4 Customer Details:
+      %div
+        = f.fields_for :user, @user do |pf|
+          %div
+            = pf.label :email
+            = pf.text_field :email
+          %div
+            = pf.label :address
+            = pf.text_area :address
+          %div
+            = pf.label 'Credit Card Number'
+            = pf.text_field :cc_number
+          %div
+            = pf.label 'CVV'
+            = pf.text_field :cvv
+          %div
+            = pf.label 'Expiry Date'
+            = pf.date_select :cc_expiry_date, start_year: Date.today.year, start_month: Date.today.month, start_day: Date.today.day
+    %div
+      = f.submit 'Make Payment'
+- else
+  Your basket is empty. Please add items.

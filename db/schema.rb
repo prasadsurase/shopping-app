@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126110159) do
+ActiveRecord::Schema.define(version: 20161127175752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.float    "price",      default: 0.0
-    t.boolean  "active",     default: true
-    t.integer  "discount",   default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.decimal  "price",      precision: 8, scale: 2, default: "0.0"
+    t.boolean  "active",                             default: true
+    t.decimal  "discount",   precision: 8, scale: 2, default: "0.0"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -47,10 +47,12 @@ ActiveRecord::Schema.define(version: 20161126110159) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "state"
-    t.float    "total",      default: 0.0
-    t.float    "discount",   default: 0.0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.decimal  "total",       precision: 8, scale: 2, default: "0.0"
+    t.decimal  "discount",    precision: 8, scale: 2, default: "0.0"
+    t.decimal  "final_total", precision: 8, scale: 2, default: "0.0"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "user_id"
   end
 
   create_table "promo_codes", force: :cascade do |t|
@@ -62,6 +64,18 @@ ActiveRecord::Schema.define(version: 20161126110159) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "value",         default: 0
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.text     "address"
+    t.string   "encrypted_cc_number"
+    t.string   "encrypted_cc_number_iv"
+    t.string   "encrypted_cvv"
+    t.string   "encrypted_cvv_iv"
+    t.date     "cc_expiry_date"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_foreign_key "order_promo_codes", "orders"

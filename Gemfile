@@ -32,6 +32,7 @@ gem 'haml-rails', '~> 0.9'
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 gem 'nested_form'
+gem 'attr_encrypted', '~> 3.0.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -41,6 +42,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails'
+  gem 'bullet'
 end
 
 group :development do
