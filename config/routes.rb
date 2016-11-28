@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show]
   resources :items, only: [:index] do
     member do
-      get :add_to_basket
+      put :add_to_basket
     end
   end
 

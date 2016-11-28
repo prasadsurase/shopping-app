@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :order_item do
-    item ""
-    order ""
     quantity 1
-    unit_price 1.5
-    total_price 1.5
+    unit_price 49.99
+    total_price 49.99
+
+    association :item, factory: :item, price: 49.99, discount: 0.0
+    association :order, factory: :order
   end
 end

@@ -1,16 +1,12 @@
 FactoryGirl.define do
   factory :item do
-    name "MyString"
-    price 1.5
-    active false
-    discount 1
-  end
-
-  trait :active do
+    name 'My Item'
+    price 49.99
     active true
-  end
+    discount 0
 
-  trait :inactive do
-    active false
+    trait :inactive do
+      active false
+    end
   end
 end

@@ -4,8 +4,8 @@ class PromoCode < ApplicationRecord
 
   validates :code, :discount_type, :value, presence: true
   validates :combined, inclusion: { in: [true, false] }
-  validates :discount_type, inclusion: { in: ['percentage', 'value'] }
   validates :active, inclusion: { in: [true, false] }
+  validates :discount_type, inclusion: { in: ['percentage', 'value'] }
   validates :value, numericality: { only_integer: true, greater_than: 0 }
 
   scope :active, ->{ where(active: true) }

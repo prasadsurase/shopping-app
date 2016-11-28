@@ -3,7 +3,7 @@ class OrderPromoCode < ApplicationRecord
   belongs_to :promo_code, inverse_of: :order_promo_codes
 
   validates :order_id, uniqueness: { scope: :promo_code_id }
-  validate :some_validation
+  validate :can_be_used_jointly?
 
   after_create :update_order
 
@@ -15,7 +15,7 @@ class OrderPromoCode < ApplicationRecord
   end
 
   # validate that the enter promocodes can be used jointly
-  def some_validation
+  def can_be_used_jointly?
     ids = order.order_promo_codes.collect(&:promo_code_id).uniq
     singular_promo_codes = PromoCode.where(id: ids).where(combined: false)
     # cant use count since that data isnt saved yet and count would fire an query
