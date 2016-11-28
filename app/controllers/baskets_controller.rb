@@ -1,6 +1,7 @@
 class BasketsController < ApplicationController
   before_action :load_basket
 
+  # Destroy the basket and the session info.
   def destroy
     @basket.destroy
     session.destroy
@@ -8,16 +9,19 @@ class BasketsController < ApplicationController
     redirect_to root_path and return
   end
 
+  # Display the promo codes page.
   def checkout
     @promo_codes = PromoCode.active
     @order_promo_codes = @basket.order_promo_codes
   end
 
+  # Display the payment page. Accept user and credit card details.
   def payment
     @user = @basket.build_user
     @credit_card = @user.credit_cards.build
   end
 
+  # if the payment is successful, update the basket with the confirmed status and destroy the associated session.
   def process_payment
     if @basket.update(basket_payment_params.merge(state: :confirmed))
       session.destroy
@@ -29,6 +33,7 @@ class BasketsController < ApplicationController
     render :payment
   end
 
+  # check the entered promocodes and update the basket to reflect the discount and the final total
   def check_discount
     @basket.order_promo_codes.destroy_all
     if @basket.update(order_promo_codes_params)

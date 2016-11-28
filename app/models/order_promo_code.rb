@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: order_promo_codes
+#
+#  id            :integer          not null, primary key
+#  order_id      :integer
+#  promo_code_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class OrderPromoCode < ApplicationRecord
   belongs_to :order, inverse_of: :order_promo_codes
   belongs_to :promo_code, inverse_of: :order_promo_codes

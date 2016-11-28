@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
     @items = Item.active.page(params[:page])
   end
 
+  # Add the item to the basket if already not added.
   def add_to_basket
     item = Item.find(params[:id])
     basket = current_basket

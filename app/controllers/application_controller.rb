@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Get the current basket from the session. If the basket is not present, return a new one.
   def current_basket
     if session[:order_id]
       order = Order.find_by({id: session[:order_id]})

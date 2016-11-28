@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: order_items
+#
+#  id          :integer          not null, primary key
+#  item_id     :integer
+#  order_id    :integer
+#  quantity    :integer          default(1)
+#  unit_price  :float
+#  total_price :float
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class OrderItem < ApplicationRecord
 
   belongs_to :item, inverse_of: :order_items
@@ -13,6 +27,7 @@ class OrderItem < ApplicationRecord
 
   private
 
+  #set the unit price and the total price. The unit price is saved incase the item price might change in future.
   def set_values
     self.unit_price = item.price
     self.total_price = quantity * item.price

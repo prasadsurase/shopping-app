@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :integer          not null, primary key
+#  email      :string
+#  address    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class User < ApplicationRecord
 
   has_many :orders, inverse_of: :user
@@ -10,6 +21,8 @@ class User < ApplicationRecord
 
   private
 
+  # check if the card with the provided number is present in the system. If present, consider that card and update its info.
+  #
   def dup_card?(attrs)
     if attrs[:number].present?
       cc = credit_cards.select{|cc| cc.number == attrs[:number]}.first

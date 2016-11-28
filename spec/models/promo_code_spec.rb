@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: promo_codes
+#
+#  id            :integer          not null, primary key
+#  code          :string
+#  description   :string
+#  discount_type :string           default("value")
+#  combined      :boolean          default(TRUE)
+#  active        :boolean          default(TRUE)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  value         :integer          default(0)
+#
+
 require 'rails_helper'
 
 RSpec.describe PromoCode, type: :model do
