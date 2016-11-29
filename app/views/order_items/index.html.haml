@@ -1,14 +1,20 @@
-%h3
-  .pull-left Items in basket
-  .pull-right Total Amount: $#{current_basket.total}
 
-%table.table.table-bordered
-  %thead
-    %th Name
-    %th Price
-    %th Quantity
-    %th Total Price
-    %th Actions
-  %tbody
-    - @order_items.includes(:item).each do |order_item|
-      = render 'order_item', order_item: order_item
+.row
+  .col-md-12
+    %h3
+      .pull-left Items in basket
+      .pull-right Total Amount: $#{current_basket.total}
+.row
+  .col-md-8.col-md-offset-2
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Name
+          %th Price
+          %th Quantity
+          %th Total Price
+          %th Actions
+      %tbody
+        - @order_items.includes(:item).each_with_index do |order_item|
+          = render 'order_item', order_item: order_item
+    = paginate @order_items
