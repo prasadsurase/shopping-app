@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   validates :email, :address, presence: true
   validates :email, uniqueness: true
+  validates :email, email_format: { message: 'invalid email format' }
 
   accepts_nested_attributes_for :credit_cards, reject_if: :dup_card?
 

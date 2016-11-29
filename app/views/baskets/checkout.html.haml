@@ -1,31 +1,27 @@
 - if @basket.order_items.count > 0
   %h3
     Checkout the basket
-  = nested_form_for(@basket, url: check_discount_basket_path, method: :put) do |f|
-    - if @basket.errors.any?
-      #error_explanation
-        = "#{pluralize(@basket.errors.count, "error")} prohibited the action"
-        %ul
-          - @basket.errors.full_messages.each do |message|
-            %li= message
-    %div
-      = f.label :total
-      = f.text_field :total
-    %div
-      = f.label :discount
-      = f.text_field :discount
-    %div
-      = f.label :final_total
-      = f.text_field :final_total, disabled: true
-    %div
-      = f.fields_for :order_promo_codes, @order_promo_codes do |pf|
-        = pf.select :promo_code_id, @promo_codes.pluck(:code, :id), prompt: 'Choose a code'
-        = pf.link_to_remove 'Remove'
-      = f.link_to_add "Add promocode", :order_promo_codes
-    %div
-      = f.submit 'Apply promo codes'
-  %br
-  %div
-    = link_to 'Make Payment', payment_basket_path, class: 'btn btn-primary'
+  .row
+    .col-md-4
+      = simple_nested_form_for(@basket, url: check_discount_basket_path, method: :put) do |f|
+        - if @basket.errors.any?
+          #error_explanation
+            = "#{pluralize(@basket.errors.count, "error")} prohibited the action"
+            %ul
+              - @basket.errors.full_messages.each do |message|
+                %li= message
+        = f.input :total, readonly: true
+        = f.input :discount, readonly: true
+        = f.input :final_total, readonly: true
+        = f.simple_fields_for :order_promo_codes, @order_promo_codes do |pf|
+          = pf.input :promo_code_id, as: :select, collection: @promo_codes.pluck(:code, :id), prompt: 'Choose a code'
+          = pf.link_to_remove 'Remove'
+        = f.link_to_add "Add promocode", :order_promo_codes
+        %div
+          = f.button :submit, 'Apply promo codes'
+    .col-md-4
+      .text
+        Move to the Payment page if applied promocodes are satisfactory.
+      = link_to 'Make Payment', payment_basket_path, class: 'btn btn-primary'
 - else
   Your basket is empty. Please add items.

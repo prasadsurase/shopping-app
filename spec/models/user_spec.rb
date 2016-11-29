@@ -21,6 +21,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:address) }
     it { is_expected.to validate_uniqueness_of(:email) }
+    it { is_expected.to validate_email_format_of(:email).with_message('invalid email format') }
   end
 
   context 'nested attributes' do

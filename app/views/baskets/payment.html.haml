@@ -1,39 +1,29 @@
 - if @basket.order_items.count > 0
   %h3
     Make Payment.
-  = nested_form_for(@basket, url: process_payment_basket_path, method: :put) do |f|
-    - if @basket.errors.any?
-      #error_explanation
-        = "#{pluralize(@basket.errors.count, "error")} prohibited this action"
-        %ul
-          - @basket.errors.full_messages.each do |message|
-            %li= message
-    = f.hidden_field :id, value: @basket.id
-    %div
-      = f.label :final_total
-      = f.text_field :final_total, disabled: true
-    %div
-      %br
-      %h4 Customer Details:
-      %div
-        = f.fields_for :user, @user do |pf|
+  .row
+    .col-md-4
+      = simple_nested_form_for(@basket, url: process_payment_basket_path, method: :put) do |f|
+        - if @basket.errors.any?
+          #error_explanation
+            = "#{pluralize(@basket.errors.count, "error")} prohibited this action"
+            %ul
+              - @basket.errors.full_messages.each do |message|
+                %li= message
+        = f.input :id, as: :hidden, value: @basket.id
+        = f.input :final_total, readonly: true
+        %div
+          %br
+          %h4 Customer Details:
           %div
-            = pf.label :email
-            = pf.text_field :email
-          %div
-            = pf.label :address
-            = pf.text_area :address
-          = pf.fields_for :credit_cards, @credit_card do |ccf|
-            %div
-              = ccf.label 'Credit Card Number'
-              = ccf.text_field :number
-            %div
-              = ccf.label 'CVV'
-              = ccf.text_field :cvv
-            %div
-              = ccf.label 'Expiry Date'
-              = ccf.date_select :expiry_date, start_year: Date.today.year, start_month: Date.today.month, start_day: Date.today.day
-    %div
-      = f.submit 'Make Payment'
+            = f.fields_for :user, @user do |pf|
+              = pf.input :email, as: :email
+              = pf.input :address, as: :text
+              = pf.fields_for :credit_cards, @credit_card do |ccf|
+                = ccf.input :number, label: 'Credit Card Number'
+                = ccf.input :cvv
+                = ccf.input :expiry_date, as: :date, start_year: Date.today.year, start_month: Date.today.month, start_day: Date.today.day
+        %div
+          = f.button :submit, 'Make Payment'
 - else
   Your basket is empty. Please add items.

@@ -35,6 +35,7 @@ gem 'simple_form'
 gem 'nested_form'
 gem 'attr_encrypted', '~> 3.0.0'
 gem 'annotate'
+gem 'validates_email_format_of'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
