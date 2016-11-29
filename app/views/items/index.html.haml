@@ -1,20 +1,35 @@
 %h3
   Items
-%table.table.table-bordered
-  %thead
-    %th Name
-    %th Price
-    %th Discount
-    %th Actions
-  %tbody
-    - @items.each do |item|
-      %tr
-        %td= item.name
-        %td= item.price
-        %td= item.discount
-        %td
-          - if @basket_items.include?(item)
-            Added to the basket.
-          - else
-            = link_to 'Add to Basket', add_to_basket_item_path(item), method: :put
+.hide
+  %table.table.table-bordered
+    %thead
+      %th Name
+      %th Price
+      %th Actions
+    %tbody
+      - @items.each do |item|
+        %tr
+          %td= item.name
+          %td= item.price
+          %td
+            - if @basket_items.include?(item)
+              Added to the basket.
+            - else
+              = link_to 'Add to Basket', add_to_basket_item_path(item), method: :put
+  = paginate @items
+
+- @items.in_groups_of(3) do |group|
+  .row
+    - group.each do |item|
+      - if item
+        .col-md-4
+          .well
+            %strong #{item.name}
+            .pull-right
+              %strong #{item.price}
+            %br
+            - if @basket_items.include?(item)
+              Present in the basket.
+            - else
+              = link_to 'Add to Basket', add_to_basket_item_path(item), method: :put
 = paginate @items
