@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id])
     basket = current_basket
     if basket.items.include? item
-      redirect_to items_path, warning: 'Item already added to the basket' and return
+      redirect_to items_path, warning: 'Item already present in the basket' and return
     else
       basket.order_items.build({item: item})
       basket.valid?
