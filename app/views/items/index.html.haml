@@ -14,7 +14,7 @@
         %td= item.discount
         %td
           - if @basket_items.include?(item)
-            Already added to list.
+            Added to the basket.
           - else
             = link_to 'Add to Basket', add_to_basket_item_path(item), method: :put
 = paginate @items

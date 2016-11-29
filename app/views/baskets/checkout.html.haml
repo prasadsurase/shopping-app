@@ -14,9 +14,10 @@
         = f.input :discount, readonly: true
         = f.input :final_total, readonly: true
         = f.simple_fields_for :order_promo_codes, @order_promo_codes do |pf|
-          = pf.input :promo_code_id, as: :select, collection: @promo_codes.pluck(:code, :id), prompt: 'Choose a code'
+          = pf.input :promo_code_id, as: :select, collection: @promo_codes.pluck(:code, :id), prompt: 'Choose a code',
+            label: 'Promo Code'
           = pf.link_to_remove 'Remove'
-        = f.link_to_add "Add promocode", :order_promo_codes
+        = f.link_to_add "Add promocode", :order_promo_codes, data: {limit: PromoCode.active.count}
         %div
           = f.button :submit, 'Apply promo codes'
     .col-md-4

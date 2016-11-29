@@ -38,9 +38,8 @@ RSpec.describe OrderPromoCode, type: :model do
       order.order_promo_codes << opc_1
       order.order_promo_codes << opc_2
       expect(opc_1).to_not be_valid
-      expect(opc_2).to_not be_valid
+      expect(opc_2).to be_valid
       expect(opc_1.errors.messages[:promo_code_id]).to eq ['Cant be used with conjuction with other codes']
-      expect(opc_2.errors.messages[:promo_code_id]).to eq ['Cant be used with conjuction with other codes']
     end
 
     it 'validates if specified promocodes cannot be used in conjuction' do

@@ -31,7 +31,7 @@ class OrderPromoCode < ApplicationRecord
     singular_promo_codes = PromoCode.where(id: ids).where(combined: false)
     # cant use count since that data isnt saved yet and count would fire an query
     if order.order_promo_codes.size > 1 and singular_promo_codes.count > 0
-      self.errors.add(:promo_code_id, 'Cant be used with conjuction with other codes')
+      self.errors.add(:promo_code_id, 'Cant be used with conjuction with other codes') unless self.promo_code.combined
     end
   end
 end
