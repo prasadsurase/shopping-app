@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/prasadsurase/shopping-app/badges/gpa.svg)](https://codeclimate.com/github/prasadsurase/shopping-app)
+
+
 # README
 
 * Ruby version - 2.3.0p0
