@@ -6,12 +6,15 @@
       - if item
         .col-md-4
           .well
-            %strong #{item.name}
-            .pull-right
-              %strong #{item.price}
-            %br
-            - if @basket_items.include?(item)
-              Present in the basket.
-            - else
-              = link_to 'Add to Basket', add_to_basket_item_path(item), method: :put
+            .image
+              = image_tag item_image(item.name), class: 'img-responsive', alt: "Responsive image", style: 'height: 186px;'
+            .data
+              %strong #{item.name}
+              .pull-right
+                %strong #{item.price}
+              %br
+              - if @basket_items.include?(item)
+                Present in the basket.
+              - else
+                = link_to 'Add to Basket', add_to_basket_item_path(item), method: :put
 = paginate @items
