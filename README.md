@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/prasadsurase/shopping-app/badges/gpa.svg)](https://codeclimate.com/github/prasadsurase/shopping-app)
+[![Build Status](https://travis-ci.org/prasadsurase/shopping-app.svg?branch=master)](https://travis-ci.org/prasadsurase/shopping-app)
 
 
 # README
